@@ -1,4 +1,4 @@
-import { PrismaClient, Role, SplitMethod, VerificationStatus, TripStatus } from '@prisma/client';
+import { PrismaClient, Role, SplitMethod, VerificationStatus, TripStatus, SettlementStatus } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
@@ -7,8 +7,20 @@ async function main() {
   console.log('Seeding database...');
 
   // Clean old data
-  await prisma.$executeRawUnsafe('TRUNCATE TABLE "User" CASCADE;');
-  await prisma.$executeRawUnsafe('TRUNCATE TABLE "Trip" CASCADE;');
+await prisma.notification.deleteMany();
+await prisma.guardian.deleteMany();
+await prisma.rating.deleteMany();
+await prisma.settlement.deleteMany();
+await prisma.expenseParticipant.deleteMany();
+await prisma.expense.deleteMany();
+await prisma.message.deleteMany();
+await prisma.conversationParticipant.deleteMany();
+await prisma.conversation.deleteMany();
+await prisma.tripMember.deleteMany();
+await prisma.trip.deleteMany();
+await prisma.verificationState.deleteMany();
+await prisma.profile.deleteMany();
+await prisma.user.deleteMany();
 
   const passwordHash = bcrypt.hashSync('password123', 10);
 
@@ -297,7 +309,7 @@ async function main() {
       creditorId: userSarah.id,
       creditorName: 'Sarah Chen',
       amount: 200.00,
-      isSettled: false,
+      status: SettlementStatus.pending,
     },
   });
 
@@ -335,7 +347,7 @@ async function main() {
       body: 'Marcus Vance invited you to join Swiss Alps Winter Peak Hike starting in December.',
       type: 'invitation',
       isRead: false,
-      payload: {
+      metadata: {
         invitationId: 'inv_seed_1',
         tripId: tripSwiss.id,
         inviterId: userMarcus.id,

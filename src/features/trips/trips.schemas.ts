@@ -1,0 +1,77 @@
+import { z } from 'zod';
+
+const itineraryDaySchema = z.object({
+  dayNumber: z.number().int().min(1),
+  title: z.string().min(1, 'Itinerary title cannot be empty'),
+  description: z.string().max(1000).optional().default(''),
+  activities: z.array(z.string()).optional().default([]),
+});
+
+export const createTripSchema = z.object({
+  title: z.string().min(3, 'Title must be at least 3 characters').max(100),
+  description: z.string().min(10, 'Description must be at least 10 characters').max(2000),
+  origin: z.string().min(2, 'Origin location must be specified'),
+  destination: z.string().min(2, 'Destination location must be specified'),
+  meetingPoint: z.string().max(200).optional().nullable(),
+  imageUrl: z.string().url('Invalid cover image URL').or(z.string().length(0)).optional().nullable(),
+  startDate: z.string().transform(val => new Date(val)),
+  endDate: z.string().transform(val => new Date(val)),
+  budget: z.number().nonnegative('Budget cannot be negative').default(0),
+  budgetPreference: z.enum(['budget', 'balanced', 'luxury']).default('balanced'),
+  maxMembers: z.number().int().min(2, 'Maximum members must be at least 2'),
+  category: z.string().max(50).default('Leisure'),
+  categories: z.array(z.string()).optional().default([]),
+  difficulty: z.string().max(50).default('easy'),
+  languages: z.array(z.string()).optional().default([]),
+  visibility: z.enum(['public', 'private']).default('public'),
+  requirements: z.array(z.string()).optional().default([]),
+  tags: z.array(z.string()).optional().default([]),
+  isHosted: z.boolean().default(false),
+  itinerary: z.array(itineraryDaySchema).optional().default([]),
+}).refine(data => data.endDate >= data.startDate, {
+  message: 'End date must be on or after start date',
+  path: ['endDate'],
+});
+
+export const updateTripSchema = z.object({
+  title: z.string().min(3).max(100).optional(),
+  description: z.string().min(10).max(2000).optional(),
+  origin: z.string().min(2).optional(),
+  destination: z.string().min(2).optional(),
+  meetingPoint: z.string().max(200).optional().nullable(),
+  imageUrl: z.string().url().or(z.string().length(0)).optional().nullable(),
+  startDate: z.string().transform(val => new Date(val)).optional(),
+  endDate: z.string().transform(val => new Date(val)).optional(),
+  budget: z.number().nonnegative().optional(),
+  budgetPreference: z.enum(['budget', 'balanced', 'luxury']).optional(),
+  maxMembers: z.number().int().min(2).optional(),
+  category: z.string().max(50).optional(),
+  categories: z.array(z.string()).optional(),
+  difficulty: z.string().max(50).optional(),
+  languages: z.array(z.string()).optional(),
+  visibility: z.enum(['public', 'private']).optional(),
+  requirements: z.array(z.string()).optional(),
+  tags: z.array(z.string()).optional(),
+  isHosted: z.boolean().optional(),
+  itinerary: z.array(itineraryDaySchema).optional(),
+  status: z.enum(['draft', 'open', 'full', 'inProgress', 'completed', 'cancelled']).optional(),
+});
+
+export const searchTripsSchema = z.object({
+  destination: z.string().optional(),
+  budget: z.string().transform(val => parseFloat(val)).pipe(z.number().nonnegative()).optional(),
+  budgetPreference: z.enum(['budget', 'balanced', 'luxury']).optional(),
+  startDate: z.string().transform(val => new Date(val)).optional(),
+  endDate: z.string().transform(val => new Date(val)).optional(),
+  isHosted: z.string().transform(val => val === 'true').optional(),
+  category: z.string().optional(),
+  difficulty: z.string().optional(),
+  languages: z.union([z.string(), z.array(z.string())]).transform(val => (Array.isArray(val) ? val : [val])).optional(),
+  minTrustScore: z.string().transform(val => parseInt(val, 10)).pipe(z.number().int().min(0)).optional(),
+  availableSeats: z.string().transform(val => val === 'true').optional(),
+  status: z.enum(['draft', 'open', 'full', 'inProgress', 'completed', 'cancelled']).optional(),
+  sortBy: z.enum(['startDate', 'budget', 'createdAt']).default('createdAt'),
+  sortOrder: z.enum(['asc', 'desc']).default('desc'),
+  page: z.string().default('1').transform(val => parseInt(val, 10)).pipe(z.number().int().min(1)),
+  limit: z.string().default('10').transform(val => parseInt(val, 10)).pipe(z.number().int().min(1).max(100)),
+});

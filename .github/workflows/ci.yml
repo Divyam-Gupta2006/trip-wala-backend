@@ -1,0 +1,78 @@
+name: Trip Wala Backend CI
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  audit-and-validate:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: secretpassword
+          POSTGRES_DB: trip_wala_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run Prettier check
+        run: npx prettier --check "src/**/*.ts"
+
+      - name: Run Type Checking (tsc)
+        run: npx tsc --noEmit
+
+      - name: Run Prisma Generate
+        run: npm run prisma:generate
+
+      - name: Setup database schema
+        env:
+          DATABASE_URL: postgresql://postgres:secretpassword@localhost:5432/trip_wala_test?schema=public
+        run: npx prisma db push
+
+      - name: Run Test Suites (Vitest)
+        env:
+          DATABASE_URL: postgresql://postgres:secretpassword@localhost:5432/trip_wala_test?schema=public
+          REDIS_URL: redis://localhost:6379/0
+          JWT_SECRET: test_jwt_access_token_secret_key_12345
+          JWT_REFRESH_SECRET: test_jwt_refresh_token_secret_key_12345
+          NODE_ENV: test
+        run: npm test
+
+      - name: Verify Build
+        run: npm run build

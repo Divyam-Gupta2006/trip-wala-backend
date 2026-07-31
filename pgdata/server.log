@@ -1,0 +1,195 @@
+2026-07-31 02:24:11.367 IST [1788] LOG:  starting PostgreSQL 18.3 on x86_64-windows, compiled by msvc-19.44.35223, 64-bit
+2026-07-31 02:24:11.373 IST [1788] LOG:  listening on IPv6 address "::1", port 5433
+2026-07-31 02:24:11.373 IST [1788] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2026-07-31 02:24:11.478 IST [31776] LOG:  database system was shut down at 2026-07-31 02:24:01 IST
+2026-07-31 02:24:11.488 IST [1788] LOG:  database system is ready to accept connections
+2026-07-31 02:24:33.583 IST [6136] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:24:33.715 IST [34824] ERROR:  relation "_prisma_migrations" does not exist at character 126
+2026-07-31 02:24:33.715 IST [34824] STATEMENT:  SELECT "id", "checksum", "finished_at", "migration_name", "logs", "rolled_back_at", "started_at", "applied_steps_count" FROM "_prisma_migrations" ORDER BY "started_at" ASC
+2026-07-31 02:24:34.314 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:24:34.671 IST [35044] LOG:  checkpoint complete: wrote 986 buffers (6.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.208 s, sync=0.135 s, total=0.358 s; sync files=305, longest=0.003 s, average=0.001 s; distance=9314 kB, estimate=9314 kB; lsn=0/2104B40, redo lsn=0/2104AE8
+2026-07-31 02:24:35.658 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:24:35.695 IST [35044] LOG:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.006 s, total=0.037 s; sync files=4, longest=0.003 s, average=0.002 s; distance=4657 kB, estimate=8848 kB; lsn=0/2590FE8, redo lsn=0/2590F90
+2026-07-31 02:24:36.256 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:24:36.320 IST [35044] LOG:  checkpoint complete: wrote 47 buffers (0.3%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.029 s, sync=0.024 s, total=0.065 s; sync files=41, longest=0.002 s, average=0.001 s; distance=4840 kB, estimate=8447 kB; lsn=0/2A4B1A0, redo lsn=0/2A4B148
+2026-07-31 02:24:41.605 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:24:41.633 IST [35044] LOG:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.005 s, total=0.029 s; sync files=4, longest=0.002 s, average=0.001 s; distance=4657 kB, estimate=8068 kB; lsn=0/2ED7860, redo lsn=0/2ED7808
+2026-07-31 02:24:41.901 IST [34824] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:25:46.943 IST [14780] ERROR:  character with byte sequence 0xe2 0x9c 0x89 in encoding "UTF8" has no equivalent in encoding "WIN1252"
+2026-07-31 02:25:46.943 IST [14780] CONTEXT:  unnamed portal parameter $3
+2026-07-31 02:25:46.943 IST [14780] STATEMENT:  INSERT INTO "public"."Notification" ("id","userId","title","body","timestamp","type","isRead","payload") VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING "public"."Notification"."id", "public"."Notification"."userId", "public"."Notification"."title", "public"."Notification"."body", "public"."Notification"."timestamp", "public"."Notification"."type", "public"."Notification"."isRead", "public"."Notification"."payload"
+2026-07-31 02:25:46.972 IST [14780] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:29:41.636 IST [35044] LOG:  checkpoint starting: time
+2026-07-31 02:30:07.608 IST [35044] LOG:  checkpoint complete: wrote 238 buffers (1.5%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=25.825 s, sync=0.095 s, total=25.972 s; sync files=307, longest=0.003 s, average=0.001 s; distance=1554 kB, estimate=7417 kB; lsn=0/3064F40, redo lsn=0/305C0A0
+2026-07-31 02:33:14.796 IST [32348] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:33:15.639 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:33:15.672 IST [35044] LOG:  checkpoint complete: wrote 5 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.004 s, total=0.034 s; sync files=6, longest=0.001 s, average=0.001 s; distance=5216 kB, estimate=7197 kB; lsn=0/35740F8, redo lsn=0/35740A0
+2026-07-31 02:33:16.508 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:33:16.551 IST [35044] LOG:  checkpoint complete: wrote 22 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.017 s, sync=0.011 s, total=0.043 s; sync files=10, longest=0.003 s, average=0.002 s; distance=5311 kB, estimate=7008 kB; lsn=0/3AA3DD0, redo lsn=0/3AA3D78
+2026-07-31 02:33:17.664 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:33:17.701 IST [35044] LOG:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.011 s, sync=0.005 s, total=0.037 s; sync files=4, longest=0.003 s, average=0.002 s; distance=5172 kB, estimate=6824 kB; lsn=0/3FB0F90, redo lsn=0/3FB0F38
+2026-07-31 02:33:17.865 IST [31932] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:33:24.683 IST [33040] LOG:  could not receive data from client: An established connection was aborted by the software in your host machine.
+	
+2026-07-31 02:33:25.637 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:33:25.671 IST [35044] LOG:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.008 s, sync=0.003 s, total=0.035 s; sync files=4, longest=0.002 s, average=0.001 s; distance=5180 kB, estimate=6660 kB; lsn=0/44C0288, redo lsn=0/44C0230
+2026-07-31 02:33:26.568 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:33:26.586 IST [35044] LOG:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.005 s, total=0.018 s; sync files=4, longest=0.002 s, average=0.002 s; distance=5172 kB, estimate=6511 kB; lsn=0/49CD620, redo lsn=0/49CD5C8
+2026-07-31 02:33:27.358 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:33:27.377 IST [35044] LOG:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.004 s, total=0.020 s; sync files=4, longest=0.002 s, average=0.001 s; distance=5181 kB, estimate=6378 kB; lsn=0/4EDCB20, redo lsn=0/4EDCAC8
+2026-07-31 02:33:27.452 IST [17420] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:33:33.565 IST [15512] LOG:  could not receive data from client: An established connection was aborted by the software in your host machine.
+	
+2026-07-31 02:33:34.291 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:33:34.315 IST [35044] LOG:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.007 s, sync=0.003 s, total=0.024 s; sync files=4, longest=0.002 s, average=0.001 s; distance=5173 kB, estimate=6258 kB; lsn=0/53EA148, redo lsn=0/53EA0F0
+2026-07-31 02:33:35.033 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:33:35.055 IST [35044] LOG:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.004 s, total=0.023 s; sync files=4, longest=0.002 s, average=0.001 s; distance=5181 kB, estimate=6150 kB; lsn=0/58F9848, redo lsn=0/58F97F0
+2026-07-31 02:33:35.699 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:33:35.719 IST [35044] LOG:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.004 s, total=0.020 s; sync files=4, longest=0.002 s, average=0.001 s; distance=5173 kB, estimate=6052 kB; lsn=0/5E07028, redo lsn=0/5E06FD0
+2026-07-31 02:33:35.791 IST [30320] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:33:49.172 IST [30984] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:33:49.869 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:33:49.893 IST [35044] LOG:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.006 s, sync=0.003 s, total=0.025 s; sync files=4, longest=0.001 s, average=0.001 s; distance=5174 kB, estimate=5964 kB; lsn=0/6314958, redo lsn=0/6314900
+2026-07-31 02:33:50.657 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:33:50.673 IST [35044] LOG:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.004 s, total=0.016 s; sync files=4, longest=0.002 s, average=0.001 s; distance=5182 kB, estimate=5886 kB; lsn=0/68243A0, redo lsn=0/6824348
+2026-07-31 02:33:51.386 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:33:51.404 IST [35044] LOG:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.003 s, total=0.018 s; sync files=4, longest=0.001 s, average=0.001 s; distance=5174 kB, estimate=5815 kB; lsn=0/6D31EA8, redo lsn=0/6D31E50
+2026-07-31 02:33:51.470 IST [29636] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:33:55.838 IST [29068] LOG:  could not receive data from client: An established connection was aborted by the software in your host machine.
+	
+2026-07-31 02:33:56.126 IST [12636] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:34:23.534 IST [28280] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:34:23.757 IST [31520] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:34:31.397 IST [35172] LOG:  could not receive data from client: An established connection was aborted by the software in your host machine.
+	
+2026-07-31 02:34:32.174 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:34:32.229 IST [35044] LOG:  checkpoint complete: wrote 31 buffers (0.2%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.025 s, sync=0.016 s, total=0.055 s; sync files=29, longest=0.002 s, average=0.001 s; distance=5325 kB, estimate=5766 kB; lsn=0/7265508, redo lsn=0/72654B0
+2026-07-31 02:34:32.943 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 02:34:32.974 IST [35044] LOG:  checkpoint complete: wrote 8 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.012 s, sync=0.007 s, total=0.032 s; sync files=8, longest=0.002 s, average=0.001 s; distance=5197 kB, estimate=5709 kB; lsn=0/7778CB8, redo lsn=0/7778C60
+2026-07-31 02:34:33.063 IST [32724] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:38:28.750 IST [39892] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:38:28.944 IST [33524] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:39:32.987 IST [35044] LOG:  checkpoint starting: time
+2026-07-31 02:39:46.438 IST [35044] LOG:  checkpoint complete: wrote 123 buffers (0.8%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=13.314 s, sync=0.086 s, total=13.452 s; sync files=211, longest=0.002 s, average=0.001 s; distance=1079 kB, estimate=5246 kB; lsn=0/7895F50, redo lsn=0/7886BE8
+2026-07-31 02:41:56.459 IST [36140] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:44:32.452 IST [35044] LOG:  checkpoint starting: time
+2026-07-31 02:44:47.198 IST [35044] LOG:  checkpoint complete: wrote 134 buffers (0.8%), wrote 2 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=14.559 s, sync=0.159 s, total=14.747 s; sync files=83, longest=0.003 s, average=0.002 s; distance=1297 kB, estimate=4851 kB; lsn=0/79CB450, redo lsn=0/79CB3C0
+2026-07-31 02:47:54.973 IST [33812] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:47:55.370 IST [8256] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 02:49:32.216 IST [35044] LOG:  checkpoint starting: time
+2026-07-31 02:49:49.717 IST [35044] LOG:  checkpoint complete: wrote 158 buffers (1.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=17.134 s, sync=0.301 s, total=17.502 s; sync files=174, longest=0.005 s, average=0.002 s; distance=785 kB, estimate=4445 kB; lsn=0/7AD0E08, redo lsn=0/7A8FB08
+2026-07-31 02:52:35.273 IST [31120] ERROR:  character with byte sequence 0xf0 0x9f 0x91 0x8d in encoding "UTF8" has no equivalent in encoding "WIN1252"
+2026-07-31 02:52:35.273 IST [31120] CONTEXT:  unnamed portal parameter $1
+2026-07-31 02:52:35.273 IST [31120] STATEMENT:  UPDATE "public"."Message" SET "reactions" = $1 WHERE ("public"."Message"."id" = $2 AND 1=1) RETURNING "public"."Message"."id", "public"."Message"."conversationId", "public"."Message"."tripId", "public"."Message"."senderId", "public"."Message"."senderName", "public"."Message"."text", "public"."Message"."type", "public"."Message"."isPinned", "public"."Message"."reactions", "public"."Message"."timestamp", "public"."Message"."isEdited", "public"."Message"."isDeleted", "public"."Message"."deletedAt", "public"."Message"."imageUrl", "public"."Message"."filePath", "public"."Message"."replyToMessageId", "public"."Message"."replyToMessageText", "public"."Message"."replyToMessageSender", "public"."Message"."mentions"
+2026-07-31 02:53:45.636 IST [15428] ERROR:  character with byte sequence 0xf0 0x9f 0x91 0x8d in encoding "UTF8" has no equivalent in encoding "WIN1252"
+2026-07-31 02:53:45.636 IST [15428] CONTEXT:  unnamed portal parameter $1
+2026-07-31 02:53:45.636 IST [15428] STATEMENT:  UPDATE "public"."Message" SET "reactions" = $1 WHERE ("public"."Message"."id" = $2 AND 1=1) RETURNING "public"."Message"."id", "public"."Message"."conversationId", "public"."Message"."tripId", "public"."Message"."senderId", "public"."Message"."senderName", "public"."Message"."text", "public"."Message"."type", "public"."Message"."isPinned", "public"."Message"."reactions", "public"."Message"."timestamp", "public"."Message"."isEdited", "public"."Message"."isDeleted", "public"."Message"."deletedAt", "public"."Message"."imageUrl", "public"."Message"."filePath", "public"."Message"."replyToMessageId", "public"."Message"."replyToMessageText", "public"."Message"."replyToMessageSender", "public"."Message"."mentions"
+2026-07-31 02:54:32.724 IST [35044] LOG:  checkpoint starting: time
+2026-07-31 02:54:43.084 IST [35044] LOG:  checkpoint complete: wrote 94 buffers (0.6%), wrote 2 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=10.204 s, sync=0.109 s, total=10.361 s; sync files=54, longest=0.004 s, average=0.003 s; distance=1691 kB, estimate=4169 kB; lsn=0/7C368B0, redo lsn=0/7C36858
+2026-07-31 02:54:50.888 IST [29780] ERROR:  character with byte sequence 0xf0 0x9f 0x91 0x8d in encoding "UTF8" has no equivalent in encoding "WIN1252"
+2026-07-31 02:54:50.888 IST [29780] CONTEXT:  unnamed portal parameter $1
+2026-07-31 02:54:50.888 IST [29780] STATEMENT:  UPDATE "public"."Message" SET "reactions" = $1 WHERE ("public"."Message"."id" = $2 AND 1=1) RETURNING "public"."Message"."id", "public"."Message"."conversationId", "public"."Message"."tripId", "public"."Message"."senderId", "public"."Message"."senderName", "public"."Message"."text", "public"."Message"."type", "public"."Message"."isPinned", "public"."Message"."reactions", "public"."Message"."timestamp", "public"."Message"."isEdited", "public"."Message"."isDeleted", "public"."Message"."deletedAt", "public"."Message"."imageUrl", "public"."Message"."filePath", "public"."Message"."replyToMessageId", "public"."Message"."replyToMessageText", "public"."Message"."replyToMessageSender", "public"."Message"."mentions"
+2026-07-31 02:55:42.804 IST [38184] ERROR:  character with byte sequence 0xf0 0x9f 0x91 0x8d in encoding "UTF8" has no equivalent in encoding "WIN1252"
+2026-07-31 02:55:42.804 IST [38184] CONTEXT:  unnamed portal parameter $1
+2026-07-31 02:55:42.804 IST [38184] STATEMENT:  UPDATE "public"."Message" SET "reactions" = $1 WHERE ("public"."Message"."id" = $2 AND 1=1) RETURNING "public"."Message"."id", "public"."Message"."conversationId", "public"."Message"."tripId", "public"."Message"."senderId", "public"."Message"."senderName", "public"."Message"."text", "public"."Message"."type", "public"."Message"."isPinned", "public"."Message"."reactions", "public"."Message"."timestamp", "public"."Message"."isEdited", "public"."Message"."isDeleted", "public"."Message"."deletedAt", "public"."Message"."imageUrl", "public"."Message"."filePath", "public"."Message"."replyToMessageId", "public"."Message"."replyToMessageText", "public"."Message"."replyToMessageSender", "public"."Message"."mentions"
+2026-07-31 02:56:08.342 IST [8916] ERROR:  character with byte sequence 0xf0 0x9f 0x91 0x8d in encoding "UTF8" has no equivalent in encoding "WIN1252"
+2026-07-31 02:56:08.342 IST [8916] CONTEXT:  unnamed portal parameter $1
+2026-07-31 02:56:08.342 IST [8916] STATEMENT:  UPDATE "public"."Message" SET "reactions" = $1 WHERE ("public"."Message"."id" = $2 AND 1=1) RETURNING "public"."Message"."id", "public"."Message"."conversationId", "public"."Message"."tripId", "public"."Message"."senderId", "public"."Message"."senderName", "public"."Message"."text", "public"."Message"."type", "public"."Message"."isPinned", "public"."Message"."reactions", "public"."Message"."timestamp", "public"."Message"."isEdited", "public"."Message"."isDeleted", "public"."Message"."deletedAt", "public"."Message"."imageUrl", "public"."Message"."filePath", "public"."Message"."replyToMessageId", "public"."Message"."replyToMessageText", "public"."Message"."replyToMessageSender", "public"."Message"."mentions"
+2026-07-31 02:56:34.907 IST [38464] ERROR:  character with byte sequence 0xf0 0x9f 0x91 0x8d in encoding "UTF8" has no equivalent in encoding "WIN1252"
+2026-07-31 02:56:34.907 IST [38464] CONTEXT:  unnamed portal parameter $1
+2026-07-31 02:56:34.907 IST [38464] STATEMENT:  UPDATE "public"."Message" SET "reactions" = $1 WHERE ("public"."Message"."id" = $2 AND 1=1) RETURNING "public"."Message"."id", "public"."Message"."conversationId", "public"."Message"."tripId", "public"."Message"."senderId", "public"."Message"."senderName", "public"."Message"."text", "public"."Message"."type", "public"."Message"."isPinned", "public"."Message"."reactions", "public"."Message"."timestamp", "public"."Message"."isEdited", "public"."Message"."isDeleted", "public"."Message"."deletedAt", "public"."Message"."imageUrl", "public"."Message"."filePath", "public"."Message"."replyToMessageId", "public"."Message"."replyToMessageText", "public"."Message"."replyToMessageSender", "public"."Message"."mentions"
+2026-07-31 02:57:16.844 IST [33132] ERROR:  character with byte sequence 0xf0 0x9f 0x91 0x8d in encoding "UTF8" has no equivalent in encoding "WIN1252"
+2026-07-31 02:57:16.844 IST [33132] CONTEXT:  unnamed portal parameter $1
+2026-07-31 02:57:16.844 IST [33132] STATEMENT:  UPDATE "public"."Message" SET "reactions" = $1 WHERE ("public"."Message"."id" = $2 AND 1=1) RETURNING "public"."Message"."id", "public"."Message"."conversationId", "public"."Message"."tripId", "public"."Message"."senderId", "public"."Message"."senderName", "public"."Message"."text", "public"."Message"."type", "public"."Message"."isPinned", "public"."Message"."reactions", "public"."Message"."timestamp", "public"."Message"."isEdited", "public"."Message"."isDeleted", "public"."Message"."deletedAt", "public"."Message"."imageUrl", "public"."Message"."filePath", "public"."Message"."replyToMessageId", "public"."Message"."replyToMessageText", "public"."Message"."replyToMessageSender", "public"."Message"."mentions"
+2026-07-31 02:57:42.113 IST [38876] ERROR:  character with byte sequence 0xf0 0x9f 0x91 0x8d in encoding "UTF8" has no equivalent in encoding "WIN1252"
+2026-07-31 02:57:42.113 IST [38876] CONTEXT:  unnamed portal parameter $1
+2026-07-31 02:57:42.113 IST [38876] STATEMENT:  UPDATE "public"."Message" SET "reactions" = $1 WHERE ("public"."Message"."id" = $2 AND 1=1) RETURNING "public"."Message"."id", "public"."Message"."conversationId", "public"."Message"."tripId", "public"."Message"."senderId", "public"."Message"."senderName", "public"."Message"."text", "public"."Message"."type", "public"."Message"."isPinned", "public"."Message"."reactions", "public"."Message"."timestamp", "public"."Message"."isEdited", "public"."Message"."isDeleted", "public"."Message"."deletedAt", "public"."Message"."imageUrl", "public"."Message"."filePath", "public"."Message"."replyToMessageId", "public"."Message"."replyToMessageText", "public"."Message"."replyToMessageSender", "public"."Message"."mentions"
+2026-07-31 02:59:32.089 IST [35044] LOG:  checkpoint starting: time
+2026-07-31 02:59:42.240 IST [35044] LOG:  checkpoint complete: wrote 93 buffers (0.6%), wrote 2 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=10.003 s, sync=0.108 s, total=10.152 s; sync files=55, longest=0.004 s, average=0.002 s; distance=1811 kB, estimate=3933 kB; lsn=0/7DFB688, redo lsn=0/7DFB5F8
+2026-07-31 03:01:35.647 IST [38832] LOG:  could not receive data from client: An established connection was aborted by the software in your host machine.
+	
+2026-07-31 03:01:36.022 IST [38028] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 03:01:43.033 IST [8404] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 03:01:43.444 IST [38164] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 03:04:32.248 IST [35044] LOG:  checkpoint starting: time
+2026-07-31 03:04:40.871 IST [35044] LOG:  checkpoint complete: wrote 78 buffers (0.5%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=8.475 s, sync=0.120 s, total=8.623 s; sync files=46, longest=0.009 s, average=0.003 s; distance=480 kB, estimate=3588 kB; lsn=0/7E73A18, redo lsn=0/7E73988
+2026-07-31 03:13:33.362 IST [39348] LOG:  could not receive data from client: An established connection was aborted by the software in your host machine.
+	
+2026-07-31 03:13:33.680 IST [13980] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 03:14:32.882 IST [35044] LOG:  checkpoint starting: time
+2026-07-31 03:14:37.729 IST [35044] LOG:  checkpoint complete: wrote 44 buffers (0.3%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=4.781 s, sync=0.052 s, total=4.848 s; sync files=38, longest=0.004 s, average=0.002 s; distance=241 kB, estimate=3253 kB; lsn=0/7EAFE40, redo lsn=0/7EAFDB0
+2026-07-31 03:20:02.977 IST [25716] ERROR:  insert or update on table "NotificationPreference" violates foreign key constraint "NotificationPreference_userId_fkey"
+2026-07-31 03:20:02.977 IST [25716] DETAIL:  Key (userId)=(de48e1ef-a03d-4cbe-909b-410990f5ecf1) is not present in table "User".
+2026-07-31 03:20:02.977 IST [25716] STATEMENT:  INSERT INTO "public"."NotificationPreference" ("id","userId","chat","trips","invitations","applications","marketing","system","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING "public"."NotificationPreference"."id", "public"."NotificationPreference"."userId", "public"."NotificationPreference"."chat", "public"."NotificationPreference"."trips", "public"."NotificationPreference"."invitations", "public"."NotificationPreference"."applications", "public"."NotificationPreference"."marketing", "public"."NotificationPreference"."system", "public"."NotificationPreference"."createdAt", "public"."NotificationPreference"."updatedAt"
+2026-07-31 03:20:36.460 IST [18068] ERROR:  insert or update on table "NotificationPreference" violates foreign key constraint "NotificationPreference_userId_fkey"
+2026-07-31 03:20:36.460 IST [18068] DETAIL:  Key (userId)=(bc602e71-ca6a-465d-8d87-41711c1eb4d2) is not present in table "User".
+2026-07-31 03:20:36.460 IST [18068] STATEMENT:  INSERT INTO "public"."NotificationPreference" ("id","userId","chat","trips","invitations","applications","marketing","system","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING "public"."NotificationPreference"."id", "public"."NotificationPreference"."userId", "public"."NotificationPreference"."chat", "public"."NotificationPreference"."trips", "public"."NotificationPreference"."invitations", "public"."NotificationPreference"."applications", "public"."NotificationPreference"."marketing", "public"."NotificationPreference"."system", "public"."NotificationPreference"."createdAt", "public"."NotificationPreference"."updatedAt"
+2026-07-31 03:21:06.926 IST [20576] ERROR:  insert or update on table "NotificationPreference" violates foreign key constraint "NotificationPreference_userId_fkey"
+2026-07-31 03:21:06.926 IST [20576] DETAIL:  Key (userId)=(c94423b8-a7c5-4de1-99bc-6ae08e908980) is not present in table "User".
+2026-07-31 03:21:06.926 IST [20576] STATEMENT:  INSERT INTO "public"."NotificationPreference" ("id","userId","chat","trips","invitations","applications","marketing","system","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING "public"."NotificationPreference"."id", "public"."NotificationPreference"."userId", "public"."NotificationPreference"."chat", "public"."NotificationPreference"."trips", "public"."NotificationPreference"."invitations", "public"."NotificationPreference"."applications", "public"."NotificationPreference"."marketing", "public"."NotificationPreference"."system", "public"."NotificationPreference"."createdAt", "public"."NotificationPreference"."updatedAt"
+2026-07-31 03:24:32.736 IST [35044] LOG:  checkpoint starting: time
+2026-07-31 03:24:47.523 IST [35044] LOG:  checkpoint complete: wrote 131 buffers (0.8%), wrote 2 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=14.514 s, sync=0.221 s, total=14.787 s; sync files=69, longest=0.005 s, average=0.004 s; distance=2260 kB, estimate=3154 kB; lsn=0/80E4F38, redo lsn=0/80E4EA8
+2026-07-31 03:25:51.379 IST [29636] ERROR:  insert or update on table "NotificationPreference" violates foreign key constraint "NotificationPreference_userId_fkey"
+2026-07-31 03:25:51.379 IST [29636] DETAIL:  Key (userId)=(fbad95c0-c2a6-4cb7-8591-426fc80ee7fc) is not present in table "User".
+2026-07-31 03:25:51.379 IST [29636] STATEMENT:  INSERT INTO "public"."NotificationPreference" ("id","userId","chat","trips","invitations","applications","marketing","system","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING "public"."NotificationPreference"."id", "public"."NotificationPreference"."userId", "public"."NotificationPreference"."chat", "public"."NotificationPreference"."trips", "public"."NotificationPreference"."invitations", "public"."NotificationPreference"."applications", "public"."NotificationPreference"."marketing", "public"."NotificationPreference"."system", "public"."NotificationPreference"."createdAt", "public"."NotificationPreference"."updatedAt"
+2026-07-31 03:29:32.532 IST [35044] LOG:  checkpoint starting: time
+2026-07-31 03:29:34.928 IST [33152] LOG:  could not receive data from client: An established connection was aborted by the software in your host machine.
+	
+2026-07-31 03:29:35.369 IST [39444] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 03:29:44.567 IST [35044] LOG:  checkpoint complete: wrote 109 buffers (0.7%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=11.827 s, sync=0.172 s, total=12.035 s; sync files=65, longest=0.007 s, average=0.003 s; distance=1114 kB, estimate=2950 kB; lsn=0/8203400, redo lsn=0/81FB938
+2026-07-31 03:29:58.129 IST [32544] LOG:  could not receive data from client: An established connection was aborted by the software in your host machine.
+	
+2026-07-31 03:29:58.554 IST [23556] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 14:34:35.873 IST [35044] LOG:  checkpoint starting: time
+2026-07-31 14:34:45.141 IST [35044] LOG:  checkpoint complete: wrote 85 buffers (0.5%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=9.237 s, sync=0.023 s, total=9.268 s; sync files=43, longest=0.002 s, average=0.001 s; distance=566 kB, estimate=2712 kB; lsn=0/8289378, redo lsn=0/82892E8
+2026-07-31 14:37:24.527 IST [7208] ERROR:  insert or update on table "NotificationPreference" violates foreign key constraint "NotificationPreference_userId_fkey"
+2026-07-31 14:37:24.527 IST [7208] DETAIL:  Key (userId)=(52b4263e-b9cc-4c81-aed3-40c22cc0fa3c) is not present in table "User".
+2026-07-31 14:37:24.527 IST [7208] STATEMENT:  INSERT INTO "public"."NotificationPreference" ("id","userId","chat","trips","invitations","applications","ratings","marketing","system","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING "public"."NotificationPreference"."id", "public"."NotificationPreference"."userId", "public"."NotificationPreference"."chat", "public"."NotificationPreference"."trips", "public"."NotificationPreference"."invitations", "public"."NotificationPreference"."applications", "public"."NotificationPreference"."ratings", "public"."NotificationPreference"."marketing", "public"."NotificationPreference"."system", "public"."NotificationPreference"."createdAt", "public"."NotificationPreference"."updatedAt"
+2026-07-31 14:38:57.991 IST [27364] ERROR:  insert or update on table "NotificationPreference" violates foreign key constraint "NotificationPreference_userId_fkey"
+2026-07-31 14:38:57.991 IST [27364] DETAIL:  Key (userId)=(41ad4bf6-ef26-4a15-add0-54e4492cf447) is not present in table "User".
+2026-07-31 14:38:57.991 IST [27364] STATEMENT:  INSERT INTO "public"."NotificationPreference" ("id","userId","chat","trips","invitations","applications","ratings","marketing","system","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING "public"."NotificationPreference"."id", "public"."NotificationPreference"."userId", "public"."NotificationPreference"."chat", "public"."NotificationPreference"."trips", "public"."NotificationPreference"."invitations", "public"."NotificationPreference"."applications", "public"."NotificationPreference"."ratings", "public"."NotificationPreference"."marketing", "public"."NotificationPreference"."system", "public"."NotificationPreference"."createdAt", "public"."NotificationPreference"."updatedAt"
+2026-07-31 14:39:35.156 IST [35044] LOG:  checkpoint starting: time
+2026-07-31 14:39:50.738 IST [35044] LOG:  checkpoint complete: wrote 134 buffers (0.8%), wrote 2 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=15.532 s, sync=0.030 s, total=15.583 s; sync files=84, longest=0.002 s, average=0.001 s; distance=1944 kB, estimate=2635 kB; lsn=0/84BD718, redo lsn=0/846F648
+2026-07-31 14:43:06.616 IST [12736] LOG:  could not receive data from client: An established connection was aborted by the software in your host machine.
+	
+2026-07-31 14:43:08.485 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 14:43:08.506 IST [35044] LOG:  checkpoint complete: wrote 13 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.007 s, sync=0.005 s, total=0.022 s; sync files=7, longest=0.002 s, average=0.001 s; distance=5487 kB, estimate=5487 kB; lsn=0/89CB540, redo lsn=0/89CB4E8
+2026-07-31 14:43:09.402 IST [35044] LOG:  checkpoint starting: immediate force wait
+2026-07-31 14:43:09.423 IST [35044] LOG:  checkpoint complete: wrote 11 buffers (0.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.007 s, sync=0.005 s, total=0.021 s; sync files=8, longest=0.002 s, average=0.001 s; distance=5246 kB, estimate=5463 kB; lsn=0/8EEAD80, redo lsn=0/8EEAD28
+2026-07-31 14:43:09.494 IST [6904] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 14:43:13.774 IST [4796] LOG:  could not receive data from client: An established connection was aborted by the software in your host machine.
+	
+2026-07-31 14:43:14.119 IST [39408] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2026-07-31 14:43:38.760 IST [26908] ERROR:  insert or update on table "NotificationPreference" violates foreign key constraint "NotificationPreference_userId_fkey"
+2026-07-31 14:43:38.760 IST [26908] DETAIL:  Key (userId)=(c7933c21-a9c0-450e-8dcb-aa1a69a9468e) is not present in table "User".
+2026-07-31 14:43:38.760 IST [26908] STATEMENT:  INSERT INTO "public"."NotificationPreference" ("id","userId","chat","trips","invitations","applications","ratings","marketing","system","createdAt","updatedAt") VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING "public"."NotificationPreference"."id", "public"."NotificationPreference"."userId", "public"."NotificationPreference"."chat", "public"."NotificationPreference"."trips", "public"."NotificationPreference"."invitations", "public"."NotificationPreference"."applications", "public"."NotificationPreference"."ratings", "public"."NotificationPreference"."marketing", "public"."NotificationPreference"."system", "public"."NotificationPreference"."createdAt", "public"."NotificationPreference"."updatedAt"
+2026-07-31 14:48:09.438 IST [35044] LOG:  checkpoint starting: time
+2026-07-31 14:48:25.682 IST [35044] LOG:  checkpoint complete: wrote 149 buffers (0.9%), wrote 2 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=16.170 s, sync=0.053 s, total=16.245 s; sync files=106, longest=0.002 s, average=0.001 s; distance=2033 kB, estimate=5120 kB; lsn=0/90E7210, redo lsn=0/90E7180
+2026-07-31 14:53:09.696 IST [35044] LOG:  checkpoint starting: time
+2026-07-31 14:53:20.774 IST [35044] LOG:  checkpoint complete: wrote 101 buffers (0.6%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=10.954 s, sync=0.092 s, total=11.078 s; sync files=86, longest=0.010 s, average=0.002 s; distance=1080 kB, estimate=4716 kB; lsn=0/91F5400, redo lsn=0/91F5370

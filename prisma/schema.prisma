@@ -1,0 +1,466 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  organizer
+  coOrganizer
+  member
+}
+
+enum SplitMethod {
+  equal
+  percentage
+  custom
+}
+
+enum SettlementStatus {
+  pending
+  completed
+}
+
+enum VerificationStatus {
+  notStarted
+  pending
+  verified
+}
+
+enum TripStatus {
+  draft
+  open
+  full
+  inProgress
+  completed
+  cancelled
+}
+
+enum ApplicationStatus {
+  pending
+  accepted
+  rejected
+  cancelled
+}
+
+enum InvitationStatus {
+  pending
+  accepted
+  declined
+  cancelled
+  expired
+}
+
+model User {
+  id                   String                 @id @default(uuid())
+  name                 String
+  username             String?                @unique
+  email                String                 @unique
+  passwordHash         String
+  isDeleted            Boolean                @default(false)
+  deletedAt            DateTime?
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  profile              Profile?
+  verification         VerificationState?
+  sessions             Session[]
+  tripMemberships      TripMember[]
+  messages             Message[]
+  paidExpenses         Expense[]              @relation("PaidBy")
+  owedExpenses         ExpenseParticipant[]
+  debtorSettlements    Settlement[]           @relation("Debtor")
+  creditorSettlements  Settlement[]           @relation("Creditor")
+  ratingsGiven         Rating[]               @relation("Rater")
+  ratingsReceived      Rating[]               @relation("Ratee")
+  guardians            Guardian[]
+  notifications        Notification[]         @relation("NotificationRecipient")
+  actedNotifications   Notification[]         @relation("NotificationActor")
+  notificationPreference NotificationPreference?
+  botConversation      TravelBotConversation?
+  travelMemories       TravelMemory[]
+  applications         TripApplication[]
+  invitationsSent      TripInvitation[]       @relation("Inviter")
+  invitationsReceived  TripInvitation[]       @relation("Invitee")
+  conversationParticipations ConversationParticipant[] @relation("UserConversationParticipant")
+}
+
+model Session {
+  id           String         @id @default(uuid())
+  userId       String
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  deviceId     String
+  userAgent    String?
+  ipAddress    String?
+  lastActiveAt DateTime       @default(now())
+  createdAt    DateTime       @default(now())
+  refreshTokens RefreshToken[]
+}
+
+model RefreshToken {
+  token     String   @id
+  sessionId String
+  session   Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  isRevoked Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([sessionId])
+}
+
+model Profile {
+  userId              String   @id
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bio                 String?
+  avatarUrl           String?
+  coverImageUrl       String?
+  location            String?
+  interests           String[]
+  travelStyles        String[]
+  travelPreferences   String[]
+  budgetPreference    String   @default("balanced")
+  trustScore          Int      @default(30)
+  isIdentityVerified  Boolean  @default(false)
+  isPhoneVerified     Boolean  @default(false)
+  completedTripsCount Int      @default(0)
+  socialAccounts      String[]
+  languages           String[]
+  completedTrips      String[]
+  futureTrips         String[]
+  age                 Int
+}
+
+model VerificationState {
+  userId                  String             @id
+  user                    User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  phoneStatus             VerificationStatus @default(notStarted)
+  governmentIdStatus      VerificationStatus @default(notStarted)
+  socialStatus            VerificationStatus @default(notStarted)
+  phoneRequestedAt        DateTime?          // When user last requested phone verification
+  governmentIdRequestedAt DateTime?          // When user last requested ID verification
+  socialRequestedAt       DateTime?          // When user last requested social verification
+  phoneVerifiedAt         DateTime?
+  governmentIdVerifiedAt  DateTime?
+  socialVerifiedAt        DateTime?
+  updatedAt               DateTime           @default(now()) @updatedAt
+}
+
+model Trip {
+  id               String         @id @default(uuid())
+  title            String
+  description      String
+  origin           String
+  destination      String
+  meetingPoint     String?
+  imageUrl         String?
+  startDate        DateTime
+  endDate          DateTime
+  budget           Float          @default(0.0)
+  budgetPreference String         @default("balanced")
+  maxMembers       Int
+  category         String         @default("Leisure")
+  categories       String[]
+  difficulty       String         @default("easy")
+  languages        String[]
+  visibility       String         @default("public")
+  requirements     String[]
+  tags             String[]
+  isHosted         Boolean        @default(false)
+  isDeleted        Boolean        @default(false)
+  deletedAt        DateTime?
+  itinerary        Json           @default("[]")
+  status           TripStatus     @default(open)
+  isPublished      Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  members          TripMember[]
+  messages         Message[]
+  expenses         Expense[]
+  settlements      Settlement[]
+  memories         TravelMemory[]
+  applications     TripApplication[]
+  invitations      TripInvitation[]
+  conversation     Conversation?     @relation("TripConversation")
+
+  @@index([destination])
+  @@index([status])
+  @@index([isDeleted])
+}
+
+model TripMember {
+  id        String   @id @default(uuid())
+  tripId    String
+  trip      Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      Role     @default(member)
+  joinedAt  DateTime @default(now())
+
+  @@unique([tripId, userId])
+  @@index([userId])
+}
+
+model Message {
+  id                  String       @id @default(uuid())
+  conversationId      String
+  conversation        Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  tripId              String?
+  trip                Trip?        @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  senderId            String
+  sender              User         @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  senderName          String
+  text                String
+  type                String       @default("text") // 'text', 'system', 'attachment'
+  isPinned            Boolean      @default(false)
+  reactions           Json         @default("{}") // Map of emoji -> array of userIds
+  timestamp           DateTime     @default(now())
+  
+  // Edited & deleted state
+  isEdited            Boolean      @default(false)
+  isDeleted           Boolean      @default(false)
+  deletedAt           DateTime?
+  
+  // Attachments (metadata only)
+  imageUrl            String?
+  filePath            String?
+  
+  // Replies & Quotes
+  replyToMessageId    String?
+  replyToMessageText  String?
+  replyToMessageSender String?
+  
+  // Mentions
+  mentions            Json         @default("[]") // List of user names/IDs
+
+  @@index([conversationId])
+  @@index([senderId])
+  @@index([tripId])
+}
+
+model Conversation {
+  id           String                    @id @default(uuid())
+  name         String?                   // For trip chats: trip title, null for direct messages
+  imageUrl     String?                   // For trip chats: trip image, null for direct messages
+  type         String                    @default("direct") // "direct" or "trip"
+  tripId       String?                   @unique
+  trip         Trip?                     @relation("TripConversation", fields: [tripId], references: [id], onDelete: Cascade)
+  createdAt    DateTime                  @default(now())
+  updatedAt    DateTime                  @updatedAt
+  participants ConversationParticipant[]
+  messages     Message[]
+}
+
+model ConversationParticipant {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User         @relation("UserConversationParticipant", fields: [userId], references: [id], onDelete: Cascade)
+  joinedAt       DateTime     @default(now())
+  lastReadAt     DateTime     @default(now())
+
+  @@unique([conversationId, userId])
+  @@index([userId])
+}
+
+model Expense {
+  id           String               @id @default(uuid())
+  tripId       String
+  trip         Trip                 @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  title        String
+  description  String?              // Optional human-readable description
+  totalAmount  Float
+  currency     String               @default("INR")
+  category     String               @default("general") // food, transport, accommodation, activity, etc.
+  notes        String?              // Free-text notes
+  receiptUrl   String?              // Attachment URL (future-ready)
+  paidById     String
+  paidBy       User                 @relation("PaidBy", fields: [paidById], references: [id], onDelete: Restrict)
+  paidByName   String
+  splitMethod  SplitMethod          @default(equal)
+  date         DateTime             @default(now())
+  isDeleted    Boolean              @default(false)
+  deletedAt    DateTime?
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  participants ExpenseParticipant[]
+
+  @@index([tripId])
+  @@index([paidById])
+}
+
+model ExpenseParticipant {
+  id          String   @id @default(uuid())
+  expenseId   String
+  expense     Expense  @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String
+  amount      Float    // Amount this participant owes
+  percentage  Float    @default(0.0) // Used when splitMethod = percentage
+  paidAmount  Float    @default(0.0) // How much they have paid toward this expense
+  settledAt   DateTime? // When their share was fully settled
+
+  @@unique([expenseId, userId])
+  @@index([userId])
+}
+
+model Settlement {
+  id               String           @id @default(uuid())
+  tripId           String
+  trip             Trip             @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  debtorId         String
+  debtor           User             @relation("Debtor", fields: [debtorId], references: [id], onDelete: Cascade)
+  debtorName       String
+  creditorId       String
+  creditor         User             @relation("Creditor", fields: [creditorId], references: [id], onDelete: Cascade)
+  creditorName     String
+  amount           Float
+  status           SettlementStatus @default(pending)
+  notes            String?          // Optional payment notes
+  paymentReference String?          // UPI reference / external payment ID (future-ready)
+  settledAt        DateTime?        // When marked completed
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  @@index([tripId])
+  @@index([debtorId])
+  @@index([creditorId])
+}
+
+model Guardian {
+  id                        String   @id @default(uuid())
+  userId                    String
+  user                      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name                      String
+  phone                     String
+  relationship              String
+  email                     String?  // Optional email for future notifications
+  notes                     String?  // Additional context about the guardian
+  isPrimaryEmergencyContact Boolean  @default(false)
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @default(now()) @updatedAt
+
+  @@index([userId])
+}
+
+model Rating {
+  id                   String   @id @default(uuid())
+  tripId               String
+  raterId              String
+  rater                User     @relation("Rater", fields: [raterId], references: [id], onDelete: Cascade)
+  rateeId              String
+  ratee                User     @relation("Ratee", fields: [rateeId], references: [id], onDelete: Cascade)
+  reliability          Int      // 1-5
+  communication        Int      // 1-5
+  respectfulness       Int      // 1-5
+  socialCompatibility  Int      // 1-5
+  funToTravelWith      Int      // 1-5
+  planningContribution Int      // 1-5
+  review               String?  // Optional freetext review
+  createdAt            DateTime @default(now())
+
+  @@unique([tripId, raterId, rateeId]) // One rating per rater/ratee/trip
+  @@index([rateeId])
+  @@index([raterId])
+  @@index([tripId])
+}
+
+model TravelMemory {
+  id          String   @id @default(uuid())
+  tripId      String?
+  trip        Trip?    @relation(fields: [tripId], references: [id], onDelete: SetNull)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title       String
+  description String
+  destination String?
+  mediaUrl    String?  // Primary media reference (storage-provider independent)
+  mediaUrls   String[] // Additional media references (future-ready)
+  visibility  String   @default("public") // "public" | "friends" | "private"
+  date        DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+  @@index([tripId])
+}
+
+model Notification {
+  id                String    @id @default(uuid())
+  userId            String    // Recipient
+  user              User      @relation("NotificationRecipient", fields: [userId], references: [id], onDelete: Cascade)
+  actorId           String?   // Actor who triggered the notification
+  actor             User?     @relation("NotificationActor", fields: [actorId], references: [id], onDelete: SetNull)
+  type              String    // e.g. "application_submitted", "application_accepted", etc.
+  title             String
+  body              String
+  relatedEntityId   String?   // e.g. tripId, messageId, etc.
+  relatedEntityType String?   // e.g. "trip", "message", "application", etc.
+  metadata          Json      @default("{}") // Custom dynamic metadata payload
+  isRead            Boolean   @default(false)
+  createdAt         DateTime  @default(now())
+  readAt            DateTime? // When it was marked read
+  isDeleted         Boolean   @default(false) // Soft delete support
+  deletedAt         DateTime?
+
+  @@index([userId])
+  @@index([actorId])
+  @@index([isRead])
+}
+
+model NotificationPreference {
+  id           String   @id @default(uuid())
+  userId       String   @unique
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chat         Boolean  @default(true)
+  trips        Boolean  @default(true)
+  invitations  Boolean  @default(true)
+  applications Boolean  @default(true)
+  ratings      Boolean  @default(true)
+  marketing    Boolean  @default(true)
+  system       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model TravelBotConversation {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages  Json     @default("[]") // Array of TravelBotMessageDto
+  updatedAt DateTime @updatedAt
+}
+
+model TripApplication {
+  id          String            @id @default(uuid())
+  tripId      String
+  trip        Trip              @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  message     String?
+  reviewNotes String?
+  status      ApplicationStatus @default(pending)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@unique([tripId, userId])
+}
+
+model TripInvitation {
+  id         String           @id @default(uuid())
+  tripId     String
+  trip       Trip             @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  inviterId  String
+  inviter    User             @relation("Inviter", fields: [inviterId], references: [id], onDelete: Cascade)
+  inviteeId  String
+  invitee    User             @relation("Invitee", fields: [inviteeId], references: [id], onDelete: Cascade)
+  role       Role             @default(member)
+  status     InvitationStatus @default(pending)
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  @@unique([tripId, inviteeId])
+}

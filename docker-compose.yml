@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: trip_wala_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: trip_wala
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: trip_wala_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: trip_wala_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@tripwala.com
+      PGADMIN_DEFAULT_PASSWORD: adminpassword
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
+  redisdata:
